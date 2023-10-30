@@ -29,9 +29,6 @@ def app():
     else:
         st.write("正しい形式で入力してください（例：#ffffff）")
 
-if __name__ == '__main__':
-    app()
-import streamlit as st
 
 def decimal_to_hex(decimal_value):
     return hex(decimal_value)[2:].zfill(2)
