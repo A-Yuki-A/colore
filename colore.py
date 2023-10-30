@@ -16,16 +16,13 @@ def app():
         rgb = hex_to_rgb(color_hex)
         binary = rgb_to_binary(rgb)
 
-        st.markdown(
-            f"""
+        st.write(f"""
             <style>
                 body {{
                     background-color: {color_hex};
                 }}
             </style>
-            """
-            , unsafe_allow_html=True
-        )
+        """, unsafe_allow_html=True)
 
         st.write(f"RGB: {rgb}")
         st.write(f"Binary: {binary}")
