@@ -1,45 +1,36 @@
 import streamlit as st
 
 def hex_to_rgb(hex_code):
-    hex_code = hex_code.lstrip('#')
-    return tuple(int(hex_code[i:i+2], 16) for i in (0, 2 ,4))
+    hex_code = hex_code.lstrip("#")
+    return tuple(int(hex_code[i:i+2], 16) for i in (0, 2, 4))
 
 def rgb_to_binary(rgb):
-    return [format(i, '08b') for i in rgb]
+    return tuple(format(i, '08b') for i in rgb)
 
-def main():
-    st.title('Color Converter')
+def app():
+    st.title("16進数カラーコード変換アプリ")
 
-    hex_color = st.text_input('Enter a Hex color code (with #):', '#ffffff')
-    hex_color = hex_color.strip()
+    color_hex = st.text_input("16進数のカラーコードを入力してください", "#ffffff")
 
-    if hex_color:
-        try:
-            rgb = hex_to_rgb(hex_color)
-            binary = rgb_to_binary(rgb)
+    if len(color_hex) == 7 and color_hex[0] == "#":
+        rgb = hex_to_rgb(color_hex)
+        binary = rgb_to_binary(rgb)
 
-            st.write(f"RGB: {rgb}")
-            st.write("RGB to Binary:")
-            for i, color in enumerate(['Red', 'Green', 'Blue']):
-                st.write(f"{color}: {binary[i]}")
-            
-            st.write('Displaying the color:')
-            st.write('This is the color you chose:', hex_color)
-            st.markdown(
-                f'''
-                <style>
-                .color-box {{
-                    height: 100px;
-                    width: 100px;
-                    background-color: {hex_color};
+        st.markdown(
+            f"""
+            <style>
+                body {{
+                    background-color: {color_hex};
                 }}
-                </style>
-                '''
-            )
-            st.markdown(f'<div class="color-box"></div>', unsafe_allow_html=True)
+            </style>
+            """
+            , unsafe_allow_html=True
+        )
 
-        except ValueError:
-            st.error('Invalid Hex code. Please enter a valid Hex color code.')
+        st.write(f"RGB: {rgb}")
+        st.write(f"Binary: {binary}")
+    else:
+        st.write("正しい形式で入力してください（例：#ffffff）")
 
 if __name__ == '__main__':
-    main()
+    app()
