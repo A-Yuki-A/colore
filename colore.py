@@ -31,3 +31,23 @@ def app():
 
 if __name__ == '__main__':
     app()
+import streamlit as st
+
+def decimal_to_hex(decimal_value):
+    return hex(decimal_value)[2:].zfill(2)
+
+def main():
+    st.title('RGB to Hexadecimal Converter')
+
+    r = st.number_input('Enter the decimal value for R (0-255)', 0, 255)
+    g = st.number_input('Enter the decimal value for G (0-255)', 0, 255)
+    b = st.number_input('Enter the decimal value for B (0-255)', 0, 255)
+
+    hex_r = decimal_to_hex(r)
+    hex_g = decimal_to_hex(g)
+    hex_b = decimal_to_hex(b)
+
+    st.write(f'Hexadecimal conversion: #{hex_r}{hex_g}{hex_b}')
+
+if __name__ == '__main__':
+    main()
